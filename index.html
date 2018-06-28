@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<head>
+  <title>Visualization using Vega Lite</title>
+  <meta charset="utf-8">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.2/vega.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-rc3/vega-lite.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.20/vega-embed.js"></script>
+
+  <style media="screen">
+    /* Add space between Vega-Embed links  */
+    .vega-actions a {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <u><center><h1>Line Chart Visualization</h1></center></u>
+  <!-- Container for the visualization -->
+  <div id="vis"></div>
+
+  <script>
+  // Assign the specification to a local variable vlSpec.
+  var vlSpec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+     "title": "Donation by U.S.",
+        "description": " Total donation (USD) by U.S. to other countries.",
+
+    "data":{
+        "url": "linechart.csv"
+    },
+    "mark": "line",
+    "encoding":
+        {
+            "x": {"field": "year", "type": "ordinal"},
+            "y": {"field": "total_amount", "type": "quantitative"}
+        }
+
+
+  };
+
+  // Embed the visualization in the container with id `vis`
+  vega.embed("#vis", vlSpec);
+  </script>
+  <h3>Line chart description and interesting insights:</h3>
+  <ul>
+      Since, I planned to visualize the most recent year's data (i.e. 2010) of United States, amount donated to other countries by United States in year 2010 has 
+      been visualized in this line chart. <br />
+      The yearly donation period is from 2002 to 2010 except year <b>2004</b>. <br />In sum, by this linechart, 
+      we can conclude that the minimum donation happened in year <b>2003</b>. On the other hand, maximum donation happened in 2010.
+      <br /> <br /> The interesting fact is that the donation amount was under <b>20,000,000 USD</b> for all years except year 2010
+      because just after the year 2009 sudden increment in donation happened. In addition to this, <b>120,000,000 USD</b> has been
+      donated by US in between year 2009 and 2010. <br />
+      By which I got the curiosity that what can be the reason for this. Therefore, for the bar
+      graph visualization, I considered the recipient countries along with recieved amount in perticular year <b>2010</b>.
+  </ul>
+  
+  <u><center><h1>Bar Chart Visualization</h1></center></u>
+  <div id="vis1"></div>
+  <script>
+   var vlSpec1 = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+    "title": "Donation by U.S.",
+    "description": " Total donation (USD) to other countires by United States in year 2010.",
+    "data":{"url": "barchart.csv"},
+    "mark": "bar",
+    "encoding":{
+        "y":{"field": "recipient countries", "type": "nominal","scale": {"rangeStep": 17}},
+        
+        "x":{"field": "received amount (USD) in year 2010", "type": "quantitative"}
+    }
+  };
+
+  // Embed the visualization in the container with id `vis2`
+  vega.embed("#vis1", vlSpec1);
+  </script>
+   <h3>Bar chart description and interesting insights:</h3>
+  <ul>
+      As I mentioned in the line chart discription that there was a sudden hike of donation by US in year 2010. As a result, 
+      I considered the parameters viz. recipient countiries, donation amount (in USD) to find out the answer that if 
+      it is evenly donated amount among some different countires or the donation recipient is only one country. Interestingly, 
+      It can be clearly seen by the bar chart that <b>Bilateral unspecified</b> is the recipient
+      of this huge donation amount. It recieved more than <b>100,000,000 USD</b> in only one year which is a huge donation amount in 
+      comparison to other recipient countries.
+      <br /><br /> After this, the other major recipients were <b>Pakistan, Guinea, Palestinian Adm. Areas, and Philippines</b> respectively. 
+      Though, the amount recieved by these countries was less than 10,000,000 USD. <br />
+      Moreover, <b>Nigeria, Sri Lanka, Niger, Belarus, Afghanistan and Africa</b>, regional respectively, were the countries which recieved the 
+      amount between <b>19,00,000 USD</b> to <b>9,00,000 USD</b> respectively.<br />
+      At last, other countries except aforementioned recived donation under <b>8,60,000 USD</b>. <br /><br />
+      <i>In conclusion, by visualizing both charts, we can raise the question or enquire the reasons behind the huge donation amount given
+      by US to a specific country in most recent year 2010. </i>
+  </ul>
+  <h3>Tutorials which I used while doing this assignment: </h3>
+  Here is the two links which I used to understand the vega functionality and csv, json data format along with it's conversion techniques:
+  <ul>
+      <li>https://vega.github.io/vega/tutorials/</li>
+     <li>https://www.youtube.com/watch?v=AzgZPwbor-s</li>
+   <ul>
+</body>
+</html>
